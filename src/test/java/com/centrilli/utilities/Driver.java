@@ -50,26 +50,32 @@ public class Driver {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
                     driverPool.set(new ChromeDriver());
+                    driverPool.get().manage().window().setSize(new Dimension(1420,830));
+                    driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                     break;
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
                     driverPool.set(new FirefoxDriver());
+                    driverPool.get().manage().window().setSize(new Dimension(1420,830));
+                    driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                     break;
                 case "remote-chrome":
                     // assign your grid server address
-                    String gridAdress = "100.26.112.139"; // put your own Linux grid IP here
+                    String gridAdress = "54.89.242.106"; // put your own Linux grid IP here (this IP Oscar' working IP)
                     try {
                         URL url = new URL("http://"+gridAdress+":4444/wd/hub");
                         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
                         desiredCapabilities.setBrowserName("chrome");
                         driverPool.set(new RemoteWebDriver(url,desiredCapabilities));
+                        driverPool.get().manage().window().setSize(new Dimension(1420,830));
+                        driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     }
                     break;
+
             }
-            driverPool.get().manage().window().setSize(new Dimension(1420,830));
-            driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         }
 
         return driverPool.get();

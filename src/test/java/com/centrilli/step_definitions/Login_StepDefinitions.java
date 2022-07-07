@@ -34,11 +34,46 @@ public class Login_StepDefinitions {
     }
     @When("user clicks the log in button")
     public void user_clicks_the_log_in_button() {
-        BrowserUtils.clickWithJS(loginPage.logInButton);
+        BrowserUtils.clickWithJS(loginPage.logInButton);//more comfortable
+      //  loginPage.logInButton.click();
     }
+
     @Then("user should be navigate to main page")
     public void user_should_be_navigate_to_main_page() {
         BrowserUtils.waitForVisibility(mainPage.searchBox,10);
         Assert.assertTrue(mainPage.searchBox.isDisplayed());
     }
+    @When("user enters invalid {string} to the password box")
+    public void user_enters_invalid_to_the_password_box(String string) {
+        loginPage.passwordBox.sendKeys("invalid password");
+
+    }
+    @Then("Verify that {string} message is displayed")
+    public void verify_that_message_is_displayed(String string) {
+        Assert.assertTrue(loginPage.wrongLoginPasswordMessage.isDisplayed());
+
+    }
+
+    @Then("user sees Please fill out this field message")
+    public void user_sees_please_fill_out_this_field_message() {
+      String fillOutMessage= loginPage.passwordBox.getAttribute("validationMessage");
+        Assert.assertEquals("Lütfen bu alanı doldurun.",fillOutMessage);
+    }
+    @When("user enters valid {string} to the username box for salesmanagers")
+    public void user_enters_valid_to_the_username_box_for_salesmanagers(String string) {
+        loginPage.usernameBox.sendKeys(string);
+
+    }
+    @When("user enters valid {string} to the password box for salesmanagers")
+    public void user_enters_valid_to_the_password_box_for_salesmanagers(String string) {
+        loginPage.passwordBox.sendKeys(string);
+    }
+
+    @When("user enters invalid {string} to the username box")
+    public void user_enters_invalid_to_the_username_box(String string) {
+       loginPage.usernameBox.sendKeys("invalid username");
+    }
+
+
+
 }

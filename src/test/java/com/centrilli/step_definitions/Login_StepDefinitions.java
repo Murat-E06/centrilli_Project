@@ -34,6 +34,7 @@ public class Login_StepDefinitions {
     }
     @When("user clicks the log in button")
     public void user_clicks_the_log_in_button() {
+        BrowserUtils.waitFor(3);
         BrowserUtils.clickWithJS(loginPage.logInButton);//more comfortable
       //  loginPage.logInButton.click();
     }
@@ -73,6 +74,22 @@ public class Login_StepDefinitions {
     public void user_enters_invalid_to_the_username_box(String string) {
        loginPage.usernameBox.sendKeys("invalid username");
     }
+
+    @When("user clicks Reset Password link")
+    public void user_clicks_reset_password_link() {
+        loginPage.resetPasswordLink2.click();
+
+
+    }
+    @Then("user sees Your Email  box")
+    public void user_sees_your_email_box() {
+        //Assert.assertTrue(loginPage.usernameBox.isDisplayed());
+        BrowserUtils.waitFor(3);
+        String expectedURL="https://qa.centrilli.com/web/reset_password?";
+        String actualURL=Driver.getDriver().getCurrentUrl();
+        Assert.assertEquals(expectedURL,actualURL);
+    }
+
 
 
 

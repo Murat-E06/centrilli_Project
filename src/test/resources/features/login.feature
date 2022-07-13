@@ -47,7 +47,13 @@ Scenario: Checking login functionality with valid credentials
        And user clicks the log in button
        Then Verify that "Wrong login/password" message is displayed
 
-       @wip
+       @CNT-1259
+       Scenario: User land on the "reset password" page after clicking on the "Reset password" link
+         Given user goes to login page
+         When user clicks Reset Password link
+         Then user sees Your Email  box
+
+         @wip
 
 
 
